@@ -1,6 +1,6 @@
 # Placing Objects and Handling 3D Interaction
 
-Place virtual content on real-world surfaces, and enable the user to interact with virtual content by using gestures. 
+Place virtual content at tracked, real-world locations, and enable the user to interact with virtual content by using gestures. 
 
 ## Overview
 
