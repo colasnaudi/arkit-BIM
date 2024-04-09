@@ -14,6 +14,7 @@ class VirtualObject: SCNReferenceNode {
     /// The model name derived from the `referenceURL`.
     var modelName: String {
         return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
+        //return referenceURL.lastPathComponent.replacingOccurrences(of: ".usdz", with: "")
     }
     
     /// The alignments that are allowed for a virtual object.
@@ -80,6 +81,20 @@ extension VirtualObject {
             return VirtualObject(url: url)
         }
     }()
+    /*
+     static let availableObjects: [VirtualObject] = {
+         guard let resourcesURLs = Bundle.main.urls(forResourcesWithExtension: "usdz", subdirectory: nil) else {
+             fatalError("Failed to locate USDZ files in the resources folder")
+         }
+         
+         return resourcesURLs.compactMap { url in
+             guard let virtualObject = VirtualObject(url: url) else {
+                 fatalError("Failed to create VirtualObject from \(url.lastPathComponent)")
+             }
+             return virtualObject
+         }
+     }()
+     */
     
     /// Returns a `VirtualObject` if one exists as an ancestor to the provided node.
     static func existingObjectContainingNode(_ node: SCNNode) -> VirtualObject? {
