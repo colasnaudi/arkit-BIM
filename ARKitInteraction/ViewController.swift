@@ -23,6 +23,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var upperControlsView: UIView!
 
+    @IBOutlet weak var uiSlider: UISlider!
+    
+    @IBOutlet weak var uiSliderLabel: UILabel!
+    
+    
     // MARK: - UI Elements
     
     let coachingOverlay = ARCoachingOverlayView()
@@ -50,6 +55,8 @@ class ViewController: UIViewController {
             VirtualObject.myVirtualObject = myVirtualObject
         }
     }
+    
+    var currentHeight: Float?
     
     var scenePlacement: ARRaycastResult?
     
@@ -184,5 +191,11 @@ class ViewController: UIViewController {
         }
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func sliderValueChanged(_ sender: Any) {
+        uiSliderLabel.text = "\(uiSlider.value)"
+        currentHeight = uiSlider.value
+        updateHeight3DPosition(myVirtualObject)
     }
 }

@@ -39,6 +39,8 @@ extension ViewController: UIDocumentPickerDelegate {
         }
         myVirtualObject = virtualObject
         
+        // TODO: - Set the cursor to the actual height
+        
         // Load the virtual object using the VirtualObjectLoader
         virtualObjectLoader.loadVirtualObject(virtualObject) { [weak self] loadedObject in
             do {

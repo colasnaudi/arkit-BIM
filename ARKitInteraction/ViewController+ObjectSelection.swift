@@ -63,6 +63,10 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         }
     }
     
+    func updateHeight3DPosition (_ virtualObject: VirtualObject) {
+        // TODO: - Update the height of the virtualObject
+    }
+    
     // - Tag: ProcessRaycastResults
     private func setVirtualObject3DPosition(_ results: [ARRaycastResult], with virtualObject: VirtualObject) {
         
