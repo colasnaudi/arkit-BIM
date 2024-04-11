@@ -10,11 +10,11 @@ import SceneKit
 import ARKit
 
 class VirtualObject: SCNReferenceNode {
+    static var myVirtualObject: VirtualObject?
     
     /// The model name derived from the `referenceURL`.
     var modelName: String {
         return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
-        //return referenceURL.lastPathComponent.replacingOccurrences(of: ".usdz", with: "")
     }
     
     /// The alignments that are allowed for a virtual object.
@@ -67,35 +67,16 @@ class VirtualObject: SCNReferenceNode {
 
 extension VirtualObject {
     // MARK: Static Properties and Methods
-    /// Loads all the model objects within `Models.scnassets`.
+
     static let availableObjects: [VirtualObject] = {
-        let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
+        var virtualObjects: [VirtualObject] = []
 
-        let fileEnumerator = FileManager().enumerator(at: modelsURL, includingPropertiesForKeys: [])!
-
-        return fileEnumerator.compactMap { element in
-            let url = element as! URL
-
-            guard url.pathExtension == "scn" && !url.path.contains("lighting") else { return nil }
-
-            return VirtualObject(url: url)
+        if let myObject = myVirtualObject {
+            virtualObjects.append(myObject)
         }
+        return virtualObjects
     }()
-    /*
-     static let availableObjects: [VirtualObject] = {
-         guard let resourcesURLs = Bundle.main.urls(forResourcesWithExtension: "usdz", subdirectory: nil) else {
-             fatalError("Failed to locate USDZ files in the resources folder")
-         }
-         
-         return resourcesURLs.compactMap { url in
-             guard let virtualObject = VirtualObject(url: url) else {
-                 fatalError("Failed to create VirtualObject from \(url.lastPathComponent)")
-             }
-             return virtualObject
-         }
-     }()
-     */
-    
+
     /// Returns a `VirtualObject` if one exists as an ancestor to the provided node.
     static func existingObjectContainingNode(_ node: SCNNode) -> VirtualObject? {
         if let virtualObjectRoot = node as? VirtualObject {

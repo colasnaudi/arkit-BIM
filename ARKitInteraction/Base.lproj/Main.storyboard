@@ -138,7 +138,7 @@
                                     <color key="titleColor" red="0.85882352941176465" green="0.72941176470588232" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="showVirtualObjectSelectionViewController" destination="BV1-FR-VrT" eventType="touchUpInside" id="zNz-qB-P16"/>
+                                    <action selector="showVirtualObjectSelectionViewController" destination="BV1-FR-VrT" eventType="touchUpInside" id="HiR-mM-BE9"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="3cb-dQ-oXx">

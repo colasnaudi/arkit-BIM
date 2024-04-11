@@ -19,10 +19,15 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         
         DispatchQueue.main.async {
             self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
+            guard let sceneView = self.sceneView else { return }
             
-            // If the object selection menu is open, update availability of items
-            if self.objectsViewController?.viewIfLoaded?.window != nil {
-                self.objectsViewController?.updateObjectAvailability()
+            if let query = sceneView.getRaycastQuery(),
+                let result = sceneView.castRay(for: query).first {
+                self.scenePlacement = result
+                self.raycastQuery = query
+            } else {
+                self.scenePlacement = nil
+                self.raycastQuery = nil
             }
         }
     }

@@ -14,6 +14,8 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
      estimated by a hit test from the center of the screen.
      - Tag: PlaceVirtualObject */
     func placeVirtualObject(_ virtualObject: VirtualObject) {
+        virtualObject.raycastQuery = self.raycastQuery
+        virtualObject.mostRecentInitialPlacementResult = self.scenePlacement
         guard focusSquare.state != .initializing, let query = virtualObject.raycastQuery else {
             self.statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
             if let controller = self.objectsViewController {

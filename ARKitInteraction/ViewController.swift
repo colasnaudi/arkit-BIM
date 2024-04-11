@@ -45,6 +45,16 @@ class ViewController: UIViewController {
     /// Coordinates the loading and unloading of reference nodes for virtual objects.
     let virtualObjectLoader = VirtualObjectLoader()
     
+    var myVirtualObject = VirtualObject() {
+        didSet {
+            VirtualObject.myVirtualObject = myVirtualObject
+        }
+    }
+    
+    var scenePlacement: ARRaycastResult?
+    
+    var raycastQuery: ARRaycastQuery?
+    
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
     
@@ -121,8 +131,16 @@ class ViewController: UIViewController {
 
     func updateFocusSquare(isObjectVisible: Bool) {
         if isObjectVisible || coachingOverlay.isActive {
+//            print("Object visible")
+//            if(focusSquare.state == .initializing) {
+//                print("State .... Initializing")
+//            } else {
+//                print("State .... Detecting")
+//            }
             focusSquare.hide()
         } else {
+//            print("Object non")
+//            print(focusSquare.state)
             focusSquare.unhide()
             statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
         }
@@ -148,6 +166,7 @@ class ViewController: UIViewController {
             addObjectButton.isHidden = true
             objectsViewController?.dismiss(animated: false, completion: nil)
         }
+        //print("Focus square state", focusSquare.state)
     }
     
     // MARK: - Error handling
@@ -166,5 +185,4 @@ class ViewController: UIViewController {
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
     }
-
 }
