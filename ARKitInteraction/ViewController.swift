@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var uiSliderLabel: UILabel!
     
+    @IBOutlet weak var uiScaleLabel: UILabel!
+    
+    @IBOutlet weak var uiScaleSlider: UISlider!
     
     // MARK: - UI Elements
     
@@ -57,6 +60,8 @@ class ViewController: UIViewController {
     }
     
     var currentHeight: Float?
+    
+    var currentScale: Float?
     
     var scenePlacement: ARRaycastResult?
     
@@ -138,16 +143,8 @@ class ViewController: UIViewController {
 
     func updateFocusSquare(isObjectVisible: Bool) {
         if isObjectVisible || coachingOverlay.isActive {
-//            print("Object visible")
-//            if(focusSquare.state == .initializing) {
-//                print("State .... Initializing")
-//            } else {
-//                print("State .... Detecting")
-//            }
             focusSquare.hide()
         } else {
-//            print("Object non")
-//            print(focusSquare.state)
             focusSquare.unhide()
             statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
         }
@@ -173,7 +170,6 @@ class ViewController: UIViewController {
             addObjectButton.isHidden = true
             objectsViewController?.dismiss(animated: false, completion: nil)
         }
-        //print("Focus square state", focusSquare.state)
     }
     
     // MARK: - Error handling
@@ -194,8 +190,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sliderValueChanged(_ sender: Any) {
-        uiSliderLabel.text = "\(uiSlider.value)"
+        uiSliderLabel.text = "Hauteur : \(uiSlider.value)"
         currentHeight = uiSlider.value
-        updateHeight3DPosition(myVirtualObject)
+        if !self.virtualObjectLoader.loadedObjects.isEmpty {
+            updateHeight3DPosition(myVirtualObject)
+        }
+    }
+    @IBAction func scaleSliderValueChanged(_ sender: Any) {
+        uiScaleLabel.text = "Echelle : \(uiScaleSlider.value)"
+        currentScale = uiScaleSlider.value
+        if !self.virtualObjectLoader.loadedObjects.isEmpty {
+            updateScale3DPosition(myVirtualObject, newScale: currentScale!)
+        }
     }
 }

@@ -7,6 +7,7 @@ Methods on the main view controller for handling virtual object loading and move
 
 import UIKit
 import ARKit
+import simd
 
 extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     
@@ -63,18 +64,63 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         }
     }
     
-    func updateHeight3DPosition (_ virtualObject: VirtualObject) {
-        // TODO: - Update the height of the virtualObject
+    func updateHeight3DPosition(_ virtualObject: VirtualObject) {
+        // Get the current transform of the virtual object
+        let currentTransform = virtualObject.simdTransform
+
+        // Extract translation from the current transform
+        var translation = currentTransform.translation
+
+        guard let currentHeight = self.currentHeight else {
+            print("Current height value is nil.")
+            return
+        }
+        
+        // Update the vertical position to the specified height
+        translation.y = currentHeight
+
+        // Create a new transform with the updated vertical position
+        var newTransform = matrix_identity_float4x4
+        newTransform.translation = translation
+
+        // Apply the new transform to the virtual object
+        virtualObject.simdTransform = newTransform
+    }
+    
+    func updateScale3DPosition(_ virtualObject: VirtualObject, newScale: Float) {
+        // Get the current transform of the virtual object
+        var currentTransform = virtualObject.simdTransform
+
+        // Ensure that the current transform is valid
+        if currentTransform != matrix_identity_float4x4 {
+            // Extract the current scale
+            let currentScale = SIMD3<Float>(sqrt(currentTransform.columns.0.x * currentTransform.columns.0.x + currentTransform.columns.0.y * currentTransform.columns.0.y + currentTransform.columns.0.z * currentTransform.columns.0.z),
+                                            sqrt(currentTransform.columns.1.x * currentTransform.columns.1.x + currentTransform.columns.1.y * currentTransform.columns.1.y + currentTransform.columns.1.z * currentTransform.columns.1.z),
+                                            sqrt(currentTransform.columns.2.x * currentTransform.columns.2.x + currentTransform.columns.2.y * currentTransform.columns.2.y + currentTransform.columns.2.z * currentTransform.columns.2.z))
+            
+            // Calculate the new scale
+            let scaleFactor = newScale / currentScale.x
+            let scaleMatrix = float4x4(diagonal: SIMD4<Float>(scaleFactor, scaleFactor, scaleFactor, 1.0))
+
+            // Apply the new scale to the transform
+            currentTransform = simd_mul(currentTransform, scaleMatrix)
+
+            // Apply the new transform to the virtual object
+            virtualObject.simdTransform = currentTransform
+        } else {
+            print("Current transform of the virtual object is invalid.")
+        }
     }
     
     // - Tag: ProcessRaycastResults
     private func setVirtualObject3DPosition(_ results: [ARRaycastResult], with virtualObject: VirtualObject) {
-        
+        /*
         guard let result = results.first else {
             fatalError("Unexpected case: the update handler is always supposed to return at least one result.")
         }
         
         self.setTransform(of: virtualObject, with: result)
+        */
         
         // If the virtual object is not yet in the scene, add it.
         if virtualObject.parent == nil {

@@ -1,14 +1,15 @@
 //
-//  ViewController+UIDocumentPickerDelegate.swift
+//  ViexController+UpdateAnchorButtonDelegate.swift
 //  ARKitInteraction
 //
-//  Created by Colas Naudi on 10/04/2024.
+//  Created by Colas Naudi on 12/04/2024.
 //  Copyright © 2024 Apple. All rights reserved.
 //
+
 import UIKit
 import SceneKit
 
-extension ViewController: UIDocumentPickerDelegate {
+extension ViewController: UpdateAnchorButtonDelegate {
     
     // MARK: - Interface Actions
     /// Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or in response to a tap gesture in the `sceneView`
@@ -58,3 +59,4 @@ extension ViewController: UIDocumentPickerDelegate {
         displayObjectLoadingUI()
     }
 }
+

@@ -12,22 +12,22 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
         let isAnyObjectInView = virtualObjectLoader.loadedObjects.contains { object in
             return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
         }
         
         DispatchQueue.main.async {
             self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
-            guard let sceneView = self.sceneView else { return }
-            
-            if let query = sceneView.getRaycastQuery(),
-                let result = sceneView.castRay(for: query).first {
-                self.scenePlacement = result
-                self.raycastQuery = query
-            } else {
-                self.scenePlacement = nil
-                self.raycastQuery = nil
+            if self.virtualObjectLoader.loadedObjects.isEmpty {
+                guard let sceneView = self.sceneView else { return }
+                if let query = sceneView.getRaycastQuery(),
+                   let result = sceneView.castRay(for: query).first {
+                    self.scenePlacement = result
+                    self.raycastQuery = query
+                } else {
+                    self.scenePlacement = nil
+                    self.raycastQuery = nil
+                }
             }
         }
     }
