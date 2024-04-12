@@ -134,7 +134,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="wqd-EW-5b1">
-                                <rect key="frame" x="41" y="208" width="292" height="30"/>
+                                <rect key="frame" x="41" y="202" width="292" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="scaleSliderValueChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="K2a-vf-hIe"/>
@@ -147,6 +147,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opacité" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYT-gG-J00">
+                                <rect key="frame" x="43" y="245" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-QZ-mnn">
+                                <rect key="frame" x="41" y="269" width="292" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="changeOpacity:" destination="BV1-FR-VrT" eventType="valueChanged" id="cDb-2N-6Zs"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvx-Zr-CKa">
+                                <rect key="frame" x="33" y="314" width="151" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Update Anchor"/>
+                                <connections>
+                                    <action selector="updateAnchor:" destination="BV1-FR-VrT" eventType="touchUpInside" id="K4o-6y-zrC"/>
+                                </connections>
+                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnx-rc-95S">
                                 <rect key="frame" x="0.0" y="20" width="375" height="85"/>
                                 <constraints>
@@ -201,10 +224,13 @@
                         <outlet property="blurView" destination="R5W-V8-6lY" id="oF2-lD-Srf"/>
                         <outlet property="sceneView" destination="E6c-py-dvH" id="Gr4-Uw-Z4A"/>
                         <outlet property="spinner" destination="3cb-dQ-oXx" id="rnE-Xe-cDE"/>
+                        <outlet property="uiOpacityLabel" destination="hYT-gG-J00" id="74S-Bs-q4k"/>
+                        <outlet property="uiOpacitySlider" destination="SRd-QZ-mnn" id="xTZ-dB-q3N"/>
                         <outlet property="uiScaleLabel" destination="ITW-6Q-HMJ" id="9fK-1w-Phz"/>
                         <outlet property="uiScaleSlider" destination="wqd-EW-5b1" id="6Dg-f4-z5V"/>
                         <outlet property="uiSlider" destination="uDf-eK-dCL" id="PCD-MX-QsP"/>
                         <outlet property="uiSliderLabel" destination="vZH-QJ-a3C" id="rEO-t1-JoC"/>
+                        <outlet property="updateAnchorBtn" destination="Tvx-Zr-CKa" id="BbC-A7-K8R"/>
                         <outlet property="upperControlsView" destination="tnx-rc-95S" id="t42-Rb-7Tt"/>
                         <segue destination="mYv-Qg-jWH" kind="popoverPresentation" identifier="showObjects" popoverAnchorView="xcf-ic-uGo" id="WP3-Hd-cnB">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>

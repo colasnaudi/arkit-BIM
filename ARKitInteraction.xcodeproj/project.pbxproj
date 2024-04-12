@@ -19,6 +19,8 @@
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		7634FD792BC6C7DB00B3AC3D /* ViewController+UIDocumentPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634FD782BC6C7DB00B3AC3D /* ViewController+UIDocumentPickerDelegate.swift */; };
+		767BBC922BC96A710059E343 /* FocusPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767BBC912BC96A710059E343 /* FocusPin.swift */; };
+		767BBC962BC971290059E343 /* Pin.obj in Resources */ = {isa = PBXBuildFile; fileRef = 767BBC932BC96F0B0059E343 /* Pin.obj */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */; };
@@ -47,6 +49,8 @@
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7634FD782BC6C7DB00B3AC3D /* ViewController+UIDocumentPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UIDocumentPickerDelegate.swift"; sourceTree = "<group>"; };
+		767BBC912BC96A710059E343 /* FocusPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPin.swift; sourceTree = "<group>"; };
+		767BBC932BC96F0B0059E343 /* Pin.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Pin.obj; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 		1488324C1EFC3ED00043E0AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				767BBC932BC96F0B0059E343 /* Pin.obj */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
 				3929C4971E89EC2C00E00B60 /* Info.plist */,
@@ -141,6 +146,7 @@
 				C812D8671F47628300344E73 /* ThresholdPanGesture.swift */,
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
+				767BBC902BC96A4A0059E343 /* Focus Pin */,
 				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
@@ -163,6 +169,14 @@
 				E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		767BBC902BC96A4A0059E343 /* Focus Pin */ = {
+			isa = PBXGroup;
+			children = (
+				767BBC912BC96A710059E343 /* FocusPin.swift */,
+			);
+			path = "Focus Pin";
 			sourceTree = "<group>";
 		};
 		C40DF57B1EC2330700D9D59E /* Virtual Objects */ = {
@@ -235,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				767BBC962BC971290059E343 /* Pin.obj in Resources */,
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
@@ -255,6 +270,7 @@
 				1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
+				767BBC922BC96A710059E343 /* FocusPin.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
 				E187105E2253C46A003B54DA /* ViewController+CoachingOverlay.swift in Sources */,

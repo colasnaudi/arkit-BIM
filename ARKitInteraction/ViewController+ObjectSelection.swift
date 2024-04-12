@@ -112,16 +112,32 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         }
     }
     
+    func updateAnchor(_ virtualObject: VirtualObject) {
+        if isUpdateAnchorClicked {
+            // Show the pointer node
+            if let pointerNode = pointerNode {
+                sceneView.scene.rootNode.addChildNode(pointerNode)
+                focusPin.isHidden = true
+            }
+            
+            print("Anchor updated clicked")
+            updateAnchorBtn.setTitle("Set position", for: .normal)
+            // Code
+            isUpdateAnchorClicked = false
+        } else {
+            // Hide the pointer node
+            pointerNode?.removeFromParentNode()
+            focusPin.isHidden = false
+            
+            print("Anchor updated released")
+            updateAnchorBtn.setTitle("Update anchor", for: .normal)
+            // Code
+            isUpdateAnchorClicked = true
+        }
+    }
+    
     // - Tag: ProcessRaycastResults
     private func setVirtualObject3DPosition(_ results: [ARRaycastResult], with virtualObject: VirtualObject) {
-        /*
-        guard let result = results.first else {
-            fatalError("Unexpected case: the update handler is always supposed to return at least one result.")
-        }
-        
-        self.setTransform(of: virtualObject, with: result)
-        */
-        
         // If the virtual object is not yet in the scene, add it.
         if virtualObject.parent == nil {
             self.sceneView.scene.rootNode.addChildNode(virtualObject)

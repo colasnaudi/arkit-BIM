@@ -31,9 +31,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var uiScaleSlider: UISlider!
     
+    @IBOutlet weak var updateAnchorBtn: UIButton!
+    
+    @IBOutlet weak var uiOpacitySlider: UISlider!
+    
+    @IBOutlet weak var uiOpacityLabel: UILabel!
+    
     // MARK: - UI Elements
     
     let coachingOverlay = ARCoachingOverlayView()
+    
+    var focusPin = FocusPin()
+    var pointerNode: SCNNode?
     
     var focusSquare = FocusSquare()
     
@@ -67,6 +76,8 @@ class ViewController: UIViewController {
     
     var raycastQuery: ARRaycastQuery?
     
+    var isUpdateAnchorClicked = true
+    
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
     
@@ -91,6 +102,9 @@ class ViewController: UIViewController {
 
         // Set up scene content.
         sceneView.scene.rootNode.addChildNode(focusSquare)
+        
+        focusPin.isHidden = true // Hide initially until needed
+        sceneView.scene.rootNode.addChildNode(focusPin)
 
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
@@ -202,5 +216,12 @@ class ViewController: UIViewController {
         if !self.virtualObjectLoader.loadedObjects.isEmpty {
             updateScale3DPosition(myVirtualObject, newScale: currentScale!)
         }
+    }
+    @IBAction func updateAnchor(_ sender: Any) {
+        updateAnchor(myVirtualObject)
+    }
+    
+    @IBAction func changeOpacity(_ sender: Any) {
+        myVirtualObject.opacity = CGFloat(uiOpacitySlider.value)
     }
 }
