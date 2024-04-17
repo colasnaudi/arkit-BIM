@@ -165,7 +165,7 @@
                                 <rect key="frame" x="33" y="314" width="151" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Update Anchor"/>
+                                <buttonConfiguration key="configuration" style="plain" title="MÀJ Position"/>
                                 <connections>
                                     <action selector="updateAnchor:" destination="BV1-FR-VrT" eventType="touchUpInside" id="K4o-6y-zrC"/>
                                 </connections>

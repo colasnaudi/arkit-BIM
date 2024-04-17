@@ -18,6 +18,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         
         DispatchQueue.main.async {
             self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
+            self.updateVirtualObjectPosition()
             if self.virtualObjectLoader.loadedObjects.isEmpty {
                 guard let sceneView = self.sceneView else { return }
                 if let query = sceneView.getRaycastQuery(),

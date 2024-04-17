@@ -41,8 +41,7 @@ class ViewController: UIViewController {
     
     let coachingOverlay = ARCoachingOverlayView()
     
-    var focusPin = FocusPin()
-    var pointerNode: SCNNode?
+    //var focusPin = FocusPin()
     
     var focusSquare = FocusSquare()
     
@@ -76,7 +75,7 @@ class ViewController: UIViewController {
     
     var raycastQuery: ARRaycastQuery?
     
-    var isUpdateAnchorClicked = true
+    var isUpdateAnchorClicked = false
     
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
@@ -102,9 +101,6 @@ class ViewController: UIViewController {
 
         // Set up scene content.
         sceneView.scene.rootNode.addChildNode(focusSquare)
-        
-        focusPin.isHidden = true // Hide initially until needed
-        sceneView.scene.rootNode.addChildNode(focusPin)
 
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
@@ -156,7 +152,7 @@ class ViewController: UIViewController {
     // MARK: - Focus Square
 
     func updateFocusSquare(isObjectVisible: Bool) {
-        if isObjectVisible || coachingOverlay.isActive {
+        if (isObjectVisible || coachingOverlay.isActive) && !isUpdateAnchorClicked {
             focusSquare.hide()
         } else {
             focusSquare.unhide()
@@ -186,6 +182,12 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateVirtualObjectPosition() {
+        if isUpdateAnchorClicked {
+            myVirtualObject.simdTransform = simd_float4x4(self.focusSquare.transform)
+        }
+    }
+    
     // MARK: - Error handling
     
     func displayErrorMessage(title: String, message: String) {
@@ -210,15 +212,30 @@ class ViewController: UIViewController {
             updateHeight3DPosition(myVirtualObject)
         }
     }
+    
     @IBAction func scaleSliderValueChanged(_ sender: Any) {
+        /*
         uiScaleLabel.text = "Echelle : \(uiScaleSlider.value)"
         currentScale = uiScaleSlider.value
         if !self.virtualObjectLoader.loadedObjects.isEmpty {
             updateScale3DPosition(myVirtualObject, newScale: currentScale!)
         }
+         */
     }
+    
     @IBAction func updateAnchor(_ sender: Any) {
-        updateAnchor(myVirtualObject)
+        if !isUpdateAnchorClicked {
+            updateAnchorBtn.setTitle("Placer ici", for: .normal)
+            
+            isUpdateAnchorClicked = true
+        } else {
+            updateAnchorBtn.setTitle("MÀJ Position", for: .normal)
+            
+            let currentFocusPosition = simd_float4x4(self.focusSquare.transform)
+            myVirtualObject.simdTransform = currentFocusPosition
+
+            isUpdateAnchorClicked = false
+        }
     }
     
     @IBAction func changeOpacity(_ sender: Any) {
